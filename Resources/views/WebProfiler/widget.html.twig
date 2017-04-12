@@ -1,0 +1,85 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    <div class="sf-toolbar-block {#{{ (collector.isAccessControlEnable and collector.isRouteSecure) ? 'sf-toolbar-status-red' }}#}">
+        <div class="sf-toolbar-icon">
+            {% set type = collector.isAccessControlEnable ? 'check' : 'remove' %}
+            {% set class = collector.isAccessControlEnable ? 'default' : 'warning' %}
+
+            {% if collector.isRouteSecure %}
+                {% if collector.isAccessControlEnable %}
+                    {% set class = 'danger' %}
+                {% else %}
+                    {% set class = 'success' %}
+                {% endif %}
+            {% endif %}
+
+            {% set class = 'default' %}
+
+            {% set classToColor = {'default': '#AAAAAA', 'success': '#4FBA6F', 'warning': '#F0C419', 'danger': '#B0413E'} %}
+
+            {% if type == 'check' %}
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="0 0 640 640" width="20" height="20">
+                    <path d="M330.7 10.12L336.13 14.93L341.61 19.6L347.14 24.13L352.73 28.52L358.38 32.77L364.08 36.89L369.84 40.87L375.65
+                    44.72L381.53 48.43L387.47 52.01L393.47 55.45L399.54 58.76L405.67 61.94L411.87 64.98L418.13 67.9L424.47 70.68L430.87
+                    73.33L437.34 75.86L443.89 78.25L450.51 80.52L457.2 82.66L463.97 84.67L470.82 86.56L477.74 88.31L484.75 89.95L491.83 91.46L499
+                    92.84L506.24 94.1L513.58 95.24L520.99 96.26L528.5 97.15L536.09 97.92L543.77 98.58L551.54 99.11L559.4 99.52L567.35 99.82L575.4
+                    99.99L583.54 100.05L583.6 113.63L583.77 127.47L584 141.56L584.27 155.88L584.54 170.4L584.77 185.1L584.93 199.97L584.99 214.97L584.9
+                    230.09L584.63 245.31L584.15 260.61L583.42 275.95L582.42 291.33L581.09 306.72L579.41 322.1L577.34 337.45L574.85 352.74L571.9
+                    367.96L568.46 383.08L564.49 398.08L559.96 412.93L554.82 427.63L549.06 442.15L542.62 456.45L535.48 470.54L527.6 484.37L518.95
+                    497.93L509.48 511.21L499.17 524.17L487.99 536.79L475.88 549.06L462.83 560.95L448.79 572.45L433.73 583.52L417.62 594.15L400.41
+                    604.32L382.08 614L362.59 623.17L341.91 631.82L319.99 639.92L298.07 631.82L277.39 623.17L257.9 614L239.57 604.32L222.36 594.15L206.25
+                    583.52L191.19 572.45L177.16 560.95L164.11 549.06L152 536.79L140.82 524.17L130.51 511.21L121.05 497.93L112.39 484.37L104.51
+                    470.53L97.38 456.45L90.94 442.14L85.17 427.63L80.04 412.93L75.51 398.07L71.54 383.07L68.09 367.96L65.15 352.74L62.66 337.45L60.59
+                    322.1L58.91 306.72L57.58 291.33L56.57 275.95L55.85 260.61L55.37 245.31L55.1 230.09L55.01 214.97L55.07 199.97L55.23 185.1L55.46
+                    170.4L55.73 155.88L56 141.56L56.23 127.47L56.4 113.63L56.46 100.05L64.6 99.99L72.65 99.82L80.6 99.52L88.46 99.11L96.23 98.58L103.91
+                    97.92L111.5 97.15L119 96.26L126.42 95.24L133.75 94.1L141 92.84L148.16 91.46L155.25 89.95L162.25 88.31L169.17 86.56L176.02 84.67L182.79
+                    82.66L189.48 80.52L196.1 78.25L202.65 75.86L209.12 73.33L215.52 70.68L221.85 67.9L228.12 64.98L234.32 61.94L240.45 58.76L246.51
+                    55.45L252.51 52.01L258.45 48.43L264.33 44.72L270.15 40.87L275.91 36.89L281.61 32.77L287.25 28.52L292.84 24.13L298.37 19.6L303.85
+                    14.93L309.28 10.12L314.66 5.17L319.99 0.08L325.32 5.17L330.7 10.12ZM249.67 288.1L210.36 327.41L298.16 415.22L429.63 283.75L390.32
+                    244.44L298.16 336.6L249.67 288.1Z" id="c3rE9PPXSx">
+                    </path>
+                    <use xlink:href="#c3rE9PPXSx" opacity="1" fill="{{ classToColor[class] }}" fill-opacity="1"></use>
+                    <use xlink:href="#c3rE9PPXSx" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use>
+                </svg>
+            {% elseif type == 'remove' %}
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="0 0 640 640" width="20" height="20">
+                    <path d="M329.99 10.08C259.27 78.86 175.63 110.05 66.46 110.05C66.46 289.15 29.4 545.72 329.99 649.92C630.59 545.72 593.54 289.16 593.54 110.05C484.36 110.05 400.72 78.86 329.99 10.08Z" id="c1BhWlLsS"></path>
+                    <path d="M369.49 320.56L440 387.15L400.51 424.44L330 357.85L259.49 424.44L220 387.15L290.51 320.56L220 253.96L259.49 216.67L330 283.26L400.51 216.67L440 253.96L369.49 320.56Z" id="bAL6B3qm9">
+                    </path>
+                    <use xlink:href="#c1BhWlLsS" opacity="1" fill="{{ classToColor[class] }}" fill-opacity="1"></use>
+                    <use xlink:href="#c1BhWlLsS" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use>
+                    <use xlink:href="#bAL6B3qm9" opacity="1" fill="#222222" fill-opacity="1"></use>
+                </svg>
+            {% endif %}
+
+            <span class="sf-toolbar-value">Route Security</span>
+        </div>
+        <div class="sf-toolbar-info">
+            <div class="sf-toolbar-info-piece">
+                <b>Access control</b>
+                <span class="sf-toolbar-status sf-toolbar-status-{{ collector.isAccessControlEnable ? 'green' : 'red' }}">
+                    {{ collector.isAccessControlEnable ? 'Enable' : 'Disable' }}
+                </span>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <b>Route secure</b>
+                <span class="sf-toolbar-status sf-toolbar-status-{{ collector.isRouteSecure ? 'green' : 'red' }}">
+                    {{ collector.isRouteSecure ? 'Yes' : 'No' }}
+                </span>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <b>Role for route</b>
+                <span>{{ collector.getRoleForRoute }}</span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{#
+{% block menu %}
+{% endblock %}
+
+{% block panel %}
+{% endblock %}
+#}

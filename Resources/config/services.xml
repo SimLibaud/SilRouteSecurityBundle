@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service id="sil_route_security.access_control" class="Sil\RouteSecurityBundle\Security\AccessControl">
+            <argument type="service" id="router"></argument>
+            <argument type="service" id="sil_route_security.route_to_role_converter"></argument>
+            <argument type="expression">
+                {
+                    enable_access_control: parameter('sil_route_security.enable_access_control'),
+                    secured_routes: parameter('sil_route_security.secured_routes'),
+                    secured_routes_format: parameter('sil_route_security.secured_routes_format'),
+                    ignored_routes: parameter('sil_route_security.ignored_routes'),
+                    ignored_routes_format: parameter('sil_route_security.ignored_routes_format'),
+                }
+            </argument>
+        </service>
+
+        <service id="sil_route_security.twig.route_security_extension" class="Sil\RouteSecurityBundle\Twig\RouteSecurityExtension">
+            <argument type="service" id="sil_route_security.access_control"></argument>
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sil_route_security.route_to_role_converter" class="Sil\RouteSecurityBundle\Role\RouteToRoleConverter"></service>
+
+        <service id="sil_route_security.access_control_listener" class="Sil\RouteSecurityBundle\Listener\AccessControlListener">
+            <argument type="service" id="sil_route_security.access_control"></argument>
+            <argument type="service" id="security.token_storage"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="4"/>
+        </service>
+
+        <service id="sil_route_security.route_security_tools" class="Sil\RouteSecurityBundle\WebProfiler\RouteSecurityTools" public="false">
+            <argument type="service" id="sil_route_security.access_control"></argument>
+            <argument type="service" id="sil_route_security.route_to_role_converter"></argument>
+            <argument type="service" id="security.token_storage"></argument>
+            <tag name="data_collector" id="sil_route_security.route_security_tools" template="SilRouteSecurityBundle:WebProfiler:widget.html.twig"></tag>
+        </service>
+
+        <service id="sil_route_security.roles_provider" class="Sil\RouteSecurityBundle\Role\RolesProvider">
+            <argument type="service" id="sil_route_security.route_to_role_converter"></argument>
+            <argument type="expression">service('sil_route_security.access_control').getSecuredRoutes()</argument>
+        </service>
+
+    </services>
+</container>
