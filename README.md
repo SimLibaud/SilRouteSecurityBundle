@@ -74,7 +74,7 @@ You can configure the bundle under the `sil_route_security` key.
 
 * Service identifier for converting the name of a route to a role.
 * The service must implement the `NamingStrategyInterface`
-* Exemple : `naming_strategy: my_hown_route_to_role_converter`
+* Exemple : `naming_strategy: my_own_route_to_role_converter`
 
 # Roles provider
 
