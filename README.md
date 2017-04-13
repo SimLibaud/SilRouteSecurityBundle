@@ -136,7 +136,7 @@ The bundle expose 3 twig functions that allow you to generate view according to 
 * Exemple :
 
 ```twig
-{% if hasUserAccessToRoutes(app.user, ['app_user_add', 'app_user_edit', 'app_user_remove']) %}
+{% if hasUserAccessToRoutes(app.user, ['app_user_add', 'app_user_edit']) %}
   <a href="{{ path('app_user_add') }}">Add user</a>
   <a href="{{ path('app_user_edit') }}">Edit user</a>
 {% endif %}
