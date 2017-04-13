@@ -156,4 +156,5 @@ You can listen it and implement your hown behaviour, logging the action for exem
 # Todo
 
 * Unit tests
+* Form type for generated roles
 * Cache mechanism for secure routes ?
