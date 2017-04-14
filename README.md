@@ -15,7 +15,13 @@ For all routes configured in access control, the user must be authenticated and 
 
 ## Composer
 
-Run the command `composer require sil/route-security-bundle`
+```json
+{
+    "require": {
+        "sil/route-security-bundle": "dev-master"
+    }
+}
+```
 
 ## Register the bundle
 
