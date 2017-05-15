@@ -121,7 +121,7 @@ class AccessControl
             }
 
             // Ignored routes format
-            if (null !== $this->ignored_routes_format && true === preg_match($this->ignored_routes_format, $route)) {
+            if (null !== $this->ignored_routes_format && true == preg_match($this->ignored_routes_format, $route)) {
                 continue;
             }
 
