@@ -12,7 +12,6 @@ use Sil\RouteSecurityBundle\Security\AccessControl;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * Class RouteSecurityTools
@@ -23,13 +22,11 @@ class RouteSecurityTools extends DataCollector
 
     private $accessControl;
     private $routeToRoleConverter;
-    private $token;
 
-    public function __construct(AccessControl $accessControl, NamingStrategyInterface $routeToRoleConverter, TokenStorageInterface $token)
+    public function __construct(AccessControl $accessControl, NamingStrategyInterface $routeToRoleConverter)
     {
         $this->accessControl = $accessControl;
         $this->routeToRoleConverter = $routeToRoleConverter;
-        $this->token = $token;
     }
 
     /**

@@ -35,7 +35,6 @@
         <service id="sil_route_security.route_security_tools" class="Sil\RouteSecurityBundle\WebProfiler\RouteSecurityTools" public="false">
             <argument type="service" id="sil_route_security.access_control"></argument>
             <argument type="service" id="sil_route_security.route_to_role_converter"></argument>
-            <argument type="service" id="security.token_storage"></argument>
             <tag name="data_collector" id="sil_route_security.route_security_tools" template="SilRouteSecurityBundle:WebProfiler:widget.html.twig"></tag>
         </service>
 
