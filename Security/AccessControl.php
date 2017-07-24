@@ -121,7 +121,7 @@ class AccessControl
             }
 
             // Ignored routes format
-            if (null !== $this->ignored_routes_format && true == preg_match($this->ignored_routes_format, $route)) {
+            if (null !== $this->ignored_routes_format && 1 === preg_match($this->ignored_routes_format, $route)) {
                 continue;
             }
 
@@ -132,7 +132,7 @@ class AccessControl
             }
 
             // Secured routes format
-            if (null !== $this->secured_routes_format && true == preg_match($this->secured_routes_format, $route)) {
+            if (null !== $this->secured_routes_format && 1 === preg_match($this->secured_routes_format, $route)) {
                 $secured_routes[] = $route;
                 continue;
             }
