@@ -1,6 +1,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/build-status/master)
 [![Code Coverage](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/?branch=master)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/fbed9290-6c11-4461-b386-cf0cb46fc43e/mini.png)](https://insight.sensiolabs.com/projects/fbed9290-6c11-4461-b386-cf0cb46fc43e)
 
 # SilRouteSecurityBundle
 
