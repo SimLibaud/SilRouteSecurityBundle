@@ -1,3 +1,7 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/build-status/master)
+[![Code Coverage](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/?branch=master)
+
 # SilRouteSecurityBundle
 
 This bundle provide a way to secure accesses to all routes of your application and adapt the view according to the logged user.
