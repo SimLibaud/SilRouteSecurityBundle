@@ -2,9 +2,8 @@
 /**
  * User: Simon Libaud
  * Date: 19/03/2017
- * Email: simonlibaud@gmail.com
+ * Email: simonlibaud@gmail.com.
  */
-
 namespace Sil\RouteSecurityBundle\Security;
 
 use Sil\RouteSecurityBundle\Interfaces\NamingStrategyInterface;
@@ -12,12 +11,10 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Class AccessControl
- * @package Sil\RouteSecurityBundl\Security
+ * Class AccessControl.
  */
 class AccessControl
 {
-
     private $router;
     private $routeToRoleConverter;
     private $is_access_control_enable;
@@ -39,10 +36,11 @@ class AccessControl
     }
 
     /**
-     * Verify if  user has access to a specific route
+     * Verify if  user has access to a specific route.
      *
      * @param UserInterface $user
-     * @param string $route
+     * @param string        $route
+     *
      * @return bool
      */
     public function hasUserAccessToRoute(UserInterface $user, $route)
@@ -52,14 +50,16 @@ class AccessControl
         }
 
         $role = $this->routeToRoleConverter->generateRoleForRoute($route);
+
         return in_array($role, $user->getRoles());
     }
 
     /**
-     * Verify if user has access to all routes
+     * Verify if user has access to all routes.
      *
      * @param UserInterface $user
-     * @param array $routes
+     * @param array         $routes
+     *
      * @return bool
      */
     public function hasUserAccessToRoutes(UserInterface $user, $routes)
@@ -74,10 +74,11 @@ class AccessControl
     }
 
     /**
-     * Verify if user has access to one of routes
+     * Verify if user has access to one of routes.
      *
      * @param UserInterface $user
      * @param $routes
+     *
      * @return bool
      */
     public function hasUserAccessAtLeastOneRoute(UserInterface $user, $routes)
@@ -91,11 +92,11 @@ class AccessControl
         return false;
     }
 
-
     /**
-     * Check if the given route is manage by the bundle depending of the configuration
+     * Check if the given route is manage by the bundle depending of the configuration.
      *
      * @param string $route
+     *
      * @return bool
      */
     public function isRouteSecure($route)
@@ -104,7 +105,7 @@ class AccessControl
     }
 
     /**
-     * Return the secured routes depending of the bundle configuration
+     * Return the secured routes depending of the bundle configuration.
      *
      * @return array $secured_routes
      */
@@ -148,5 +149,4 @@ class AccessControl
     {
         return $this->is_access_control_enable;
     }
-
 }

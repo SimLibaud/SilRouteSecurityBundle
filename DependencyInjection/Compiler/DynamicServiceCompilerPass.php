@@ -2,9 +2,8 @@
 /**
  * User: Simon Libaud
  * Date: 19/03/2017
- * Email: simonlibaud@gmail.com
+ * Email: simonlibaud@gmail.com.
  */
-
 namespace Sil\RouteSecurityBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -12,12 +11,10 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Class DynamicServiceCompilerPass
- * @package Sil\RouteSecurityBundle\CompilerPass
+ * Class DynamicServiceCompilerPass.
  */
 class DynamicServiceCompilerPass implements CompilerPassInterface
 {
-
     /**
      * {@inheritdoc}
      */

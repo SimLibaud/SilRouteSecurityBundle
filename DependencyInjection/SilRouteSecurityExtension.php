@@ -2,9 +2,8 @@
 /**
  * User: Simon Libaud
  * Date: 12/03/2017
- * Email: simonlibaud@gmail.com
+ * Email: simonlibaud@gmail.com.
  */
-
 namespace Sil\RouteSecurityBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -13,8 +12,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
- * Class SilRouteSecurityExtension
- * @package Sil\RouteSecurityBundle\DependencyInjection
+ * Class SilRouteSecurityExtension.
  */
 class SilRouteSecurityExtension extends Extension
 {
@@ -35,6 +33,5 @@ class SilRouteSecurityExtension extends Extension
         $container->setParameter('sil_route_security.ignored_routes', $config['ignored_routes']);
         $container->setParameter('sil_route_security.ignored_routes_format', $config['ignored_routes_format']);
         $container->setParameter('sil_route_security.naming_strategy', $config['naming_strategy']);
-
     }
 }
