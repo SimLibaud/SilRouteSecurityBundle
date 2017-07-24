@@ -2,17 +2,15 @@
 /**
  * User: Simon Libaud
  * Date: 12/03/2017
- * Email: simonlibaud@gmail.com
+ * Email: simonlibaud@gmail.com.
  */
-
 namespace Sil\RouteSecurityBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * Class Configuration
- * @package Sil\RouteSecurityBundle\DependencyInjection
+ * Class Configuration.
  */
 class Configuration implements ConfigurationInterface
 {

@@ -3,9 +3,8 @@
 /**
  * User: Simon Libaud
  * Date: 19/03/2017
- * Email: simonlibaud@gmail.com
+ * Email: simonlibaud@gmail.com.
  */
-
 namespace Sil\RouteSecurityBundle\Listener;
 
 use Sil\RouteSecurityBundle\Event\AccessDeniedToRouteEvent;
@@ -18,12 +17,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Class AccessControlListener
- * @package Sil\RouteSecurityBundle\Listener
+ * Class AccessControlListener.
  */
 class AccessControlListener
 {
-
     private $accessControl;
     private $tokenStorage;
     private $eventDispatcher;
@@ -57,12 +54,12 @@ class AccessControlListener
         $user = $this->tokenStorage->getToken()->getUser();
 
         if (false === $this->accessControl->hasUserAccessToRoute($user, $route)) {
-
             $access_denied_event = new AccessDeniedToRouteEvent($user, $event->getRequest());
             $this->eventDispatcher->dispatch(AccessDeniedToRouteEvent::ON_ACCESS_DENIED_TO_ROUTE, $access_denied_event);
 
             if (true === $access_denied_event->hasResponse()) {
                 $event->setResponse($access_denied_event->getResponse());
+
                 return $event;
             }
 

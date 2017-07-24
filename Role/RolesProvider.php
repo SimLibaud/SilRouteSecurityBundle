@@ -2,27 +2,25 @@
 /**
  * User: Simon Libaud
  * Date: 14/03/2017
- * Email: simonlibaud@gmail.com
+ * Email: simonlibaud@gmail.com.
  */
-
 namespace Sil\RouteSecurityBundle\Role;
 
 use Sil\RouteSecurityBundle\Interfaces\NamingStrategyInterface;
 
 /**
- * Class RolesProvider
- * @package Sil\RouteSecurityBundl\Security
+ * Class RolesProvider.
  */
 class RolesProvider
 {
-
     private $routeToRoleConverter;
     private $secured_routes;
 
     /**
      * RolesProvider constructor.
+     *
      * @param NamingStrategyInterface $routeToRoleConverter
-     * @param array $secured_routes
+     * @param array                   $secured_routes
      */
     public function __construct(NamingStrategyInterface $routeToRoleConverter, $secured_routes)
     {
@@ -31,7 +29,7 @@ class RolesProvider
     }
 
     /**
-     * Get roles for secured routes
+     * Get roles for secured routes.
      *
      * @return array $roles
      */
@@ -44,5 +42,4 @@ class RolesProvider
 
         return $roles;
     }
-
 }

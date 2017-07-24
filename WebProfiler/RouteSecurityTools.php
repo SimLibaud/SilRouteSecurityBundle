@@ -2,9 +2,8 @@
 /**
  * User: Simon Libaud
  * Date: 20/03/2017
- * Email: simonlibaud@gmail.com
+ * Email: simonlibaud@gmail.com.
  */
-
 namespace Sil\RouteSecurityBundle\WebProfiler;
 
 use Sil\RouteSecurityBundle\Interfaces\NamingStrategyInterface;
@@ -14,12 +13,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 /**
- * Class RouteSecurityTools
- * @package Sil\RouteSecurityBundle\WebProfiler
+ * Class RouteSecurityTools.
  */
 class RouteSecurityTools extends DataCollector
 {
-
     private $accessControl;
     private $routeToRoleConverter;
 
@@ -30,8 +27,8 @@ class RouteSecurityTools extends DataCollector
     }
 
     /**
-     * @param Request $request
-     * @param Response $response
+     * @param Request         $request
+     * @param Response        $response
      * @param \Exception|null $exception
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)

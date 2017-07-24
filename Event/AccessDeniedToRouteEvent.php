@@ -2,9 +2,8 @@
 /**
  * User: Simon Libaud
  * Date: 20/03/2017
- * Email: simonlibaud@gmail.com
+ * Email: simonlibaud@gmail.com.
  */
-
 namespace Sil\RouteSecurityBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
@@ -13,12 +12,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class AccessDeniedToRouteEvent
- * @package Sil\RouteSecurityBundle\Event
+ * Class AccessDeniedToRouteEvent.
  */
 class AccessDeniedToRouteEvent extends Event
 {
-
     const ON_ACCESS_DENIED_TO_ROUTE = 'sil_route_security.event.access_denied_to_route';
 
     private $user;
@@ -27,8 +24,9 @@ class AccessDeniedToRouteEvent extends Event
 
     /**
      * AccessDeniedToRouteEvent constructor.
+     *
      * @param UserInterface $user
-     * @param Request $request
+     * @param Request       $request
      */
     public function __construct(UserInterface $user, Request $request)
     {
