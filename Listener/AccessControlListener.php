@@ -62,7 +62,8 @@ class AccessControlListener
             $this->eventDispatcher->dispatch(AccessDeniedToRouteEvent::ON_ACCESS_DENIED_TO_ROUTE, $access_denied_event);
 
             if (true === $access_denied_event->hasResponse()) {
-                return $event->setResponse($access_denied_event->getResponse());
+                $event->setResponse($access_denied_event->getResponse());
+                return $event;
             }
 
             throw new AccessDeniedException();
