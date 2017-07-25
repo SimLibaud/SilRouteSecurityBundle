@@ -12,7 +12,10 @@
     ],
     "require": {
         "php": "^5.5.9 || ^7.0",
-        "symfony/framework-bundle": "^2.7 || ^3.0"
+        "symfony/framework-bundle": "^2.7 || ^3.0",
+        "symfony/security": "^3.3",
+        "symfony/yaml": "^3.3",
+        "symfony/expression-language": "^3.3"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^2.7 || ^3.0"
