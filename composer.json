@@ -15,7 +15,8 @@
         "symfony/framework-bundle": "^2.7 || ^3.0",
         "symfony/security": "^3.3",
         "symfony/yaml": "^3.3",
-        "symfony/expression-language": "^3.3"
+        "symfony/expression-language": "^3.3",
+        "phpunit/phpunit": "^6.2"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^2.7 || ^3.0"
