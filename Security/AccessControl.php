@@ -22,6 +22,7 @@ class AccessControl
     private $secured_routes_format;
     private $ignored_routes;
     private $ignored_routes_format;
+    private $all_secured_routes;
 
     public function __construct(RouterInterface $router, NamingStrategyInterface $routeToRoleConverter, $configuration)
     {
@@ -33,6 +34,8 @@ class AccessControl
         $this->secured_routes_format = $configuration['secured_routes_format'];
         $this->ignored_routes = $configuration['ignored_routes'];
         $this->ignored_routes_format = $configuration['ignored_routes_format'];
+
+        $this->all_secured_routes = null;
     }
 
     /**
@@ -101,7 +104,7 @@ class AccessControl
      */
     public function isRouteSecure($route)
     {
-        return in_array($route, $this->getSecuredRoutes());
+        return in_array($route, $this->getAllSecuredRoutes());
     }
 
     /**
@@ -109,10 +112,14 @@ class AccessControl
      *
      * @return array $secured_routes
      */
-    public function getSecuredRoutes()
+    public function getAllSecuredRoutes()
     {
+        if (true === is_array($this->all_secured_routes)) {
+            return $this->all_secured_routes;
+        }
+
+        $this->all_secured_routes = [];
         $configured_routes = array_keys($this->router->getRouteCollection()->all());
-        $secured_routes = [];
 
         foreach ($configured_routes as $route) {
 
@@ -128,18 +135,18 @@ class AccessControl
 
             // Secured routes
             if (true === in_array($route, $this->secured_routes)) {
-                $secured_routes[] = $route;
+                $this->all_secured_routes[] = $route;
                 continue;
             }
 
             // Secured routes format
             if (null !== $this->secured_routes_format && 1 === preg_match($this->secured_routes_format, $route)) {
-                $secured_routes[] = $route;
+                $this->all_secured_routes[] = $route;
                 continue;
             }
         }
 
-        return $secured_routes;
+        return $this->all_secured_routes;
     }
 
     /**
