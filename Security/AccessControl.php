@@ -6,6 +6,7 @@
  */
 namespace Sil\RouteSecurityBundle\Security;
 
+use Sil\RouteSecurityBundle\Exception\LogicException;
 use Sil\RouteSecurityBundle\Interfaces\NamingStrategyInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -22,7 +23,6 @@ class AccessControl
     private $secured_routes_format;
     private $ignored_routes;
     private $ignored_routes_format;
-    private $all_secured_routes;
 
     public function __construct(RouterInterface $router, NamingStrategyInterface $routeToRoleConverter, $configuration)
     {
@@ -34,8 +34,6 @@ class AccessControl
         $this->secured_routes_format = $configuration['secured_routes_format'];
         $this->ignored_routes = $configuration['ignored_routes'];
         $this->ignored_routes_format = $configuration['ignored_routes_format'];
-
-        $this->all_secured_routes = null;
     }
 
     /**
@@ -104,49 +102,39 @@ class AccessControl
      */
     public function isRouteSecure($route)
     {
-        return in_array($route, $this->getAllSecuredRoutes());
-    }
-
-    /**
-     * Return the secured routes depending of the bundle configuration.
-     *
-     * @return array $secured_routes
-     */
-    public function getAllSecuredRoutes()
-    {
-        if (true === is_array($this->all_secured_routes)) {
-            return $this->all_secured_routes;
-        }
-
-        $this->all_secured_routes = [];
+        $all_secured_routes = [];
         $configured_routes = array_keys($this->router->getRouteCollection()->all());
 
-        foreach ($configured_routes as $route) {
+        if (false === in_array($route, $configured_routes)) {
+            throw new LogicException(sprintf('The route %s is not defined in your routing.', $route));
+        }
+
+        foreach ($configured_routes as $configured_route) {
 
             // Ignored routes
-            if (in_array($route, $this->ignored_routes)) {
+            if (in_array($configured_route, $this->ignored_routes)) {
                 continue;
             }
 
             // Ignored routes format
-            if (null !== $this->ignored_routes_format && 1 === preg_match($this->ignored_routes_format, $route)) {
+            if (null !== $this->ignored_routes_format && 1 === preg_match($this->ignored_routes_format, $configured_route)) {
                 continue;
             }
 
             // Secured routes
-            if (true === in_array($route, $this->secured_routes)) {
-                $this->all_secured_routes[] = $route;
+            if (true === in_array($configured_route, $this->secured_routes)) {
+                $all_secured_routes[] = $configured_route;
                 continue;
             }
 
             // Secured routes format
-            if (null !== $this->secured_routes_format && 1 === preg_match($this->secured_routes_format, $route)) {
-                $this->all_secured_routes[] = $route;
+            if (null !== $this->secured_routes_format && 1 === preg_match($this->secured_routes_format, $configured_route)) {
+                $all_secured_routes[] = $configured_route;
                 continue;
             }
         }
 
-        return $this->all_secured_routes;
+        return in_array($route, $all_secured_routes);
     }
 
     /**
