@@ -157,9 +157,3 @@ If you want a different format, you can make your hown converter. Just create a 
 When user access to secured route and does not have the right, an `AccessDeniedException` is throw. The framework will convert it to a 403 response.
 Just before that, the event `AccessDeniedToRouteEvent` is dispatch. 
 You can listen it and implement your hown behaviour, logging the action for exemple, return a custom response, redirect, whatever...
-
-# Todo
-
-* Unit tests
-* Form type for generated roles
-* Cache mechanism for secure routes ?
