@@ -44,42 +44,63 @@ You can configure the bundle under the `sil_route_security` key.
 
 ## Options
 
-#### `enable_access_control`
+#### Enable access control
 
-* Enable/disable the access control
-* Type : `boolean`
-* Default value : `false`
-* Exemple : `enable_access_control: true`
+By default, the access control is disable.
+
+```yaml
+sil_route_security:
+    enable_access_control: true
+```
   
-#### `secured_routes`
-  
-* List of routes to secure
-* Type : `array`.
-* Exemple : `secured_routes: [app_user_list, app_user_add]`
+#### List of secured routes
 
-#### `secured_routes_format`
+You can define a list of secured routes :
 
-* Regex format to configure a set of routes to be secured
-* Type : `string`
-* Exemple : `secured_routes_format: "/^app_/"`
+```yaml
+sil_route_security:
+    secured_routes: [app_user_list, app_user_add]
+```
 
-#### `ignored_routes`
+#### Secured routes format
 
-* List of routes that have no access restriction
-* Type : `array`
-* Exemple : `ignored_routes: [app_home, app_login, app_logout]`
+In addition or instead of secured routes list, 
+you can define a regex format to configure a set of routes to be secured :
 
-#### `ignored_routes_format`
+```yaml
+sil_route_security:
+    secured_routes_format: "/^app_/"
+```
 
-* Regex format to configure a set of routes that have no access restriction
-* Type : `string`
-* Exemple : `ignored_routes_format: "/^app_[a-z]*_api/"`
+#### List of ignored routes
 
-#### `naming_strategy`
+You can define a list of ignored routes :
 
-* Service identifier for converting the name of a route to a role.
-* The service must implement the `NamingStrategyInterface`
-* Exemple : `naming_strategy: my_own_route_to_role_converter`
+```yaml
+sil_route_security:
+    ignored_routes: [app_home, app_login, app_logout]
+```
+
+#### Ignored routes format
+
+In addition or instead of ignored routes list, 
+you can define a regex format to configure a set of routes to be not secured :
+
+```yaml
+sil_route_security:
+    ignored_routes_format: "/^app_[a-z]*_api/"`
+```
+
+#### Naming strategy
+
+By default, to generate a role for route, the bundle convert the route name to ROLE_.strtoupper($route_name). 
+If you want a different format, you can make your hown converter. 
+Just create a service that implement the NamingStrategyInterface and configure the bundle option with your service identifier.
+
+```yaml
+sil_route_security:
+    naming_strategy: my_own_route_to_role_converter
+```
 
 # Roles provider
 
@@ -146,11 +167,6 @@ The bundle expose 3 twig functions that allow you to generate view according to 
   <a href="{{ path('app_user_edit') }}">Edit user</a>
 {% endif %}
 ```
-
-# Naming strategy
-
-By default, to generate a role for route, the bundle convert the route name to `ROLE_.strtoupper($route_name)`. 
-If you want a different format, you can make your hown converter. Just create a service that implement the `NamingStrategyInterface` and configure the bundle option `naming_strategy` with your service identifier.
 
 # Access denied behavior
 
