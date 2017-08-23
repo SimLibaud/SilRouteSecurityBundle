@@ -102,12 +102,18 @@ class AccessControl
      */
     public function isRouteSecure($route)
     {
+        return in_array($route, $this->getAllSecuredRoutes());
+    }
+
+    /**
+     * Return all secured routes manage by the bundle
+     *
+     * @return array
+     */
+    public function getAllSecuredRoutes()
+    {
         $all_secured_routes = [];
         $configured_routes = array_keys($this->router->getRouteCollection()->all());
-
-        if (false === in_array($route, $configured_routes)) {
-            throw new LogicException(sprintf('The route %s is not defined in your routing.', $route));
-        }
 
         foreach ($configured_routes as $configured_route) {
 
@@ -134,7 +140,7 @@ class AccessControl
             }
         }
 
-        return in_array($route, $all_secured_routes);
+        return $all_secured_routes;
     }
 
     /**
