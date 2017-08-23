@@ -42,8 +42,6 @@ class AccessControlTest extends TestCase
         $accessControl = $this->createFreshAccessControl();
         $this->assertTrue($accessControl->isRouteSecure('admin_home'));
         $this->assertFalse($accessControl->isRouteSecure('home_page'));
-        $this->expectException(LogicException::class);
-        $this->assertFalse($accessControl->isRouteSecure('route_not_defined'));
     }
 
     public function testIsEnable()
