@@ -42,6 +42,17 @@ class AccessControlTest extends TestCase
         $accessControl = $this->createFreshAccessControl();
         $this->assertTrue($accessControl->isRouteSecure('admin_home'));
         $this->assertFalse($accessControl->isRouteSecure('home_page'));
+        $this->assertFalse($accessControl->isRouteSecure('api_get_user'));
+    }
+    
+    public function testGetAllSecuredRoutes()
+    {
+        $accessControl = $this->createFreshAccessControl();
+        $all_secured_routes = $accessControl->getAllSecuredRoutes();
+        $this->assertContains('admin_home', $all_secured_routes);
+        $this->assertContains('admin_dashboard', $all_secured_routes);
+        $this->assertContains('admin_profile', $all_secured_routes);
+        $this->assertNotContains('api_get_user', $all_secured_routes);
     }
 
     public function testIsEnable()

@@ -13,7 +13,7 @@ class RolesProviderTest extends TestCase
         $secured_routes = ['route_foo', 'route_bar'];
         $routeToRoleConverter = $this->createMock(RouteToRoleConverter::class);
         $routeToRoleConverter
-            ->expects(new \PHPUnit_Framework_MockObject_Matcher_InvokedCount(count($secured_routes)))
+            ->expects($this->exactly(count($secured_routes)))
             ->method('generateRoleForRoute')
             ->will($this->returnCallback(function ($route) {
                 return 'ROLE_'.strtoupper($route);
