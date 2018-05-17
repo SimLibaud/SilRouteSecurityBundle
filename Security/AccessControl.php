@@ -102,7 +102,27 @@ class AccessControl
      */
     public function isRouteSecure($route)
     {
-        return in_array($route, $this->getAllSecuredRoutes());
+        // Ignored routes
+        if (true === in_array($route, $this->ignored_routes)) {
+            return false;
+        }
+
+        // Ignored routes format
+        if (null !== $this->ignored_routes_format && 1 === preg_match($this->ignored_routes_format, $route)) {
+            return false;
+        }
+
+        // Secured routes
+        if (true === in_array($route, $this->secured_routes)) {
+            return true;
+        }
+
+        // Secured routes format
+        if (null !== $this->secured_routes_format && 1 === preg_match($this->secured_routes_format, $route)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -115,29 +135,8 @@ class AccessControl
         $all_secured_routes = [];
         $configured_routes = array_keys($this->router->getRouteCollection()->all());
 
-        foreach ($configured_routes as $configured_route) {
-
-            // Ignored routes
-            if (in_array($configured_route, $this->ignored_routes)) {
-                continue;
-            }
-
-            // Ignored routes format
-            if (null !== $this->ignored_routes_format && 1 === preg_match($this->ignored_routes_format, $configured_route)) {
-                continue;
-            }
-
-            // Secured routes
-            if (true === in_array($configured_route, $this->secured_routes)) {
-                $all_secured_routes[] = $configured_route;
-                continue;
-            }
-
-            // Secured routes format
-            if (null !== $this->secured_routes_format && 1 === preg_match($this->secured_routes_format, $configured_route)) {
-                $all_secured_routes[] = $configured_route;
-                continue;
-            }
+        foreach ($configured_routes as $configured_route) if (true === $this->isRouteSecure($configured_route)){
+            $all_secured_routes[] = $configured_route;
         }
 
         return $all_secured_routes;
