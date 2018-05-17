@@ -39,5 +39,6 @@ class RouteSecurityToolsTest extends TestCase
         $this->assertTrue($routeSecurityTools->isRouteSecure());
         $this->assertEquals('ROLE_FOO', $routeSecurityTools->getRoleForRoute());
         $this->assertEquals('sil_route_security.route_security_tools', $routeSecurityTools->getName());
+        $this->assertNull($routeSecurityTools->reset());
     }
 }
