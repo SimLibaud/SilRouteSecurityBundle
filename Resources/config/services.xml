@@ -35,13 +35,14 @@
         <service id="sil_route_security.route_security_tools" class="Sil\RouteSecurityBundle\WebProfiler\RouteSecurityTools" public="false">
             <argument type="service" id="sil_route_security.access_control"></argument>
             <argument type="service" id="sil_route_security.route_to_role_converter"></argument>
-            <tag name="data_collector" id="sil_route_security.route_security_tools" template="SilRouteSecurityBundle:WebProfiler:widget.html.twig"></tag>
+            <tag name="data_collector" id="sil_route_security.route_security_tools" template="@SilRouteSecurity/WebProfiler/widget.html.twig"></tag>
         </service>
 
         <service id="sil_route_security.roles_provider" class="Sil\RouteSecurityBundle\Role\RolesProvider">
             <argument type="service" id="sil_route_security.route_to_role_converter"></argument>
             <argument type="expression">service('sil_route_security.access_control').getAllSecuredRoutes()</argument>
         </service>
+        <service id="Sil\RouteSecurityBundle\Role\RolesProvider" alias="sil_route_security.roles_provider"/>
 
     </services>
 </container>
