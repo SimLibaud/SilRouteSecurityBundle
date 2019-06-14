@@ -42,6 +42,7 @@
             <argument type="service" id="sil_route_security.route_to_role_converter"></argument>
             <argument type="expression">service('sil_route_security.access_control').getAllSecuredRoutes()</argument>
         </service>
+        <service id="Sil\RouteSecurityBundle\Role\RolesProvider" alias="sil_route_security.roles_provider"/>
 
     </services>
 </container>
