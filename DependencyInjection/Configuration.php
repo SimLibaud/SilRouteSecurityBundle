@@ -16,8 +16,13 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $tree = new TreeBuilder();
-        $root = $tree->root('sil_route_security');
+        $tree = new TreeBuilder('sil_route_security');
+        // Keep compatibility with symfony/config < 4.2
+        if (false === method_exists($tree, 'getRootNode')) {
+            $root = $tree->root('sil_route_security');
+        } else {
+            $root = $tree->getRootNode();
+        }
 
         $root
             ->children()
