@@ -27,7 +27,7 @@
 
         <service id="sil_route_security.access_control_listener" class="Sil\RouteSecurityBundle\Listener\AccessControlListener">
             <argument type="service" id="sil_route_security.access_control"></argument>
-            <argument type="service" id="security.token_storage"></argument>
+            <argument type="service" id="security.untracked_token_storage"></argument>
             <argument type="service" id="event_dispatcher"></argument>
             <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="4"/>
         </service>

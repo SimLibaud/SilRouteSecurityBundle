@@ -29,9 +29,9 @@ class RouteSecurityTools extends DataCollector
     /**
      * @param Request         $request
      * @param Response        $response
-     * @param \Exception|null $exception
+     * @param \Throwable|null $exception
      */
-    public function collect(Request $request, Response $response, \Exception $exception = null)
+    public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
         $this->data['is_access_control_enable'] = $this->accessControl->isEnable();
         $route = $request->get('_route');

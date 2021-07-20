@@ -15,15 +15,15 @@ class DynamicServiceCompilerPassTest extends TestCase
     {
         $container = new ContainerBuilder();
         $container->setParameter('sil_route_security.naming_strategy', null);
-        $container->register('sil_route_security.route_to_role_converter', $this->createMock(RouteToRoleConverter::class));
-        $container->register('router', new \stdClass());
+        $container->register('sil_route_security.route_to_role_converter', RouteToRoleConverter::class);
+        $container->register('router', null);
         $container
             ->register('sil_route_security.access_control')
             ->addArgument(new Reference('router'))
             ->addArgument(new Reference('sil_route_security.route_to_role_converter'))
         ;
         $container
-            ->register('sil_route_security.route_security_tools', new \stdClass())
+            ->register('sil_route_security.route_security_tools', null)
             ->addArgument(new Reference('sil_route_security.access_control'))
             ->addArgument(new Reference('sil_route_security.route_to_role_converter'))
         ;
@@ -39,16 +39,16 @@ class DynamicServiceCompilerPassTest extends TestCase
     {
         $container = new ContainerBuilder();
         $container->setParameter('sil_route_security.naming_strategy', 'my_own_naming_strategy');
-        $container->register('my_own_naming_strategy', $this->createMock(NamingStrategyInterface::class));
-        $container->register('sil_route_security.route_to_role_converter', $this->createMock(RouteToRoleConverter::class));
-        $container->register('router', new \stdClass());
+        $container->register('my_own_naming_strategy', NamingStrategyInterface::class);
+        $container->register('sil_route_security.route_to_role_converter', RouteToRoleConverter::class);
+        $container->register('router', null);
         $container
             ->register('sil_route_security.access_control')
             ->addArgument(new Reference('router'))
             ->addArgument(new Reference('sil_route_security.route_to_role_converter'))
         ;
         $container
-            ->register('sil_route_security.route_security_tools', new \stdClass())
+            ->register('sil_route_security.route_security_tools', null)
             ->addArgument(new Reference('sil_route_security.access_control'))
             ->addArgument(new Reference('sil_route_security.route_to_role_converter'))
         ;

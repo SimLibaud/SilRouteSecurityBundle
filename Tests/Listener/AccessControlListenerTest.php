@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -27,7 +27,7 @@ class AccessControlListenerTest extends TestCase
             ->willReturn(false);
         $tokenStorage = $this->createMock(TokenStorageInterface::class);
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $event = $this->mockGetResponseEvent();
+        $event = $this->mockRequestEvent();
 
         $accessControlListener = new AccessControlListener($accessControl, $tokenStorage, $eventDispatcher);
         $accessControlListener->onKernelRequest($event);
@@ -47,7 +47,7 @@ class AccessControlListenerTest extends TestCase
             ->willReturn(false);
         $tokenStorage = $this->createMock(TokenStorageInterface::class);
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $event = $this->mockGetResponseEvent('non_secure_route');
+        $event = $this->mockRequestEvent('non_secure_route');
 
         $accessControlListener = new AccessControlListener($accessControl, $tokenStorage, $eventDispatcher);
         $accessControlListener->onKernelRequest($event);
@@ -70,7 +70,7 @@ class AccessControlListenerTest extends TestCase
             ->method('getToken')
             ->willReturn(null);
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $event = $this->mockGetResponseEvent('secure_route');
+        $event = $this->mockRequestEvent('secure_route');
 
         $accessControlListener = new AccessControlListener($accessControl, $tokenStorage, $eventDispatcher);
         $this->expectException(LogicException::class);
@@ -96,7 +96,7 @@ class AccessControlListenerTest extends TestCase
             ->method('getToken')
             ->willReturn($token);
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $event = $this->mockGetResponseEvent('secure_route');
+        $event = $this->mockRequestEvent('secure_route');
 
         $accessControlListener = new AccessControlListener($accessControl, $tokenStorage, $eventDispatcher);
         $this->expectException(LogicException::class);
@@ -118,7 +118,7 @@ class AccessControlListenerTest extends TestCase
             ->willReturn(true);
         $tokenStorage = $this->mockTokenStorage();
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $event = $this->mockGetResponseEvent('secure_route');
+        $event = $this->mockRequestEvent('secure_route');
 
         $accessControlListener = new AccessControlListener($accessControl, $tokenStorage, $eventDispatcher);
         $this->assertNull($accessControlListener->onKernelRequest($event));
@@ -139,7 +139,7 @@ class AccessControlListenerTest extends TestCase
             ->willReturn(false);
         $tokenStorage = $this->mockTokenStorage();
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $event = $this->mockGetResponseEvent('secure_route');
+        $event = $this->mockRequestEvent('secure_route');
 
         $accessControlListener = new AccessControlListener($accessControl, $tokenStorage, $eventDispatcher);
         $this->expectException(AccessDeniedException::class);
@@ -160,24 +160,25 @@ class AccessControlListenerTest extends TestCase
             ->method('hasUserAccessToRoute')
             ->willReturn(false);
         $tokenStorage = $this->mockTokenStorage();
-        $event = $this->mockGetResponseEvent('secure_route');
+        $event = $this->mockRequestEvent('secure_route');
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $response = new Response('Custom Response');
         $eventDispatcher
             ->expects($this->once())
             ->method('dispatch')
-            ->with(AccessDeniedToRouteEvent::ON_ACCESS_DENIED_TO_ROUTE, $this->isInstanceOf(AccessDeniedToRouteEvent::class))
-            ->will($this->returnCallback(function ($name, $access_denied_event) use ($response) {
+            ->with($this->isInstanceOf(AccessDeniedToRouteEvent::class), AccessDeniedToRouteEvent::ON_ACCESS_DENIED_TO_ROUTE)
+            ->will($this->returnCallback(function ($access_denied_event, $name) use ($response) {
                 $access_denied_event->setResponse($response);
+                return $access_denied_event;
             }));
 
         $accessControlListener = new AccessControlListener($accessControl, $tokenStorage, $eventDispatcher);
-        $this->assertInstanceOf(GetResponseEvent::class, $accessControlListener->onKernelRequest($event));
+        $this->assertInstanceOf(RequestEvent::class, $accessControlListener->onKernelRequest($event));
     }
 
-    protected function mockGetResponseEvent($route = null)
+    protected function mockRequestEvent($route = null)
     {
-        $event = $this->createMock(GetResponseEvent::class);
+        $event = $this->createMock(RequestEvent::class);
         $request = $this->createMock(Request::class);
         $parameterBag = $this->createMock(ParameterBag::class);
         $parameterBag
