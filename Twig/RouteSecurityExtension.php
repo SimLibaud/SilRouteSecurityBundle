@@ -7,11 +7,13 @@
 namespace Sil\RouteSecurityBundle\Twig;
 
 use Sil\RouteSecurityBundle\Security\AccessControl;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Class RouteSecurityExtension.
  */
-class RouteSecurityExtension extends \Twig_Extension
+class RouteSecurityExtension extends AbstractExtension
 {
     private $accessControl;
 
@@ -23,9 +25,9 @@ class RouteSecurityExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('hasUserAccessToRoute', [$this->accessControl, 'hasUserAccessToRoute']),
-            new \Twig_SimpleFunction('hasUserAccessToRoutes', [$this->accessControl, 'hasUserAccessToRoutes']),
-            new \Twig_SimpleFunction('hasUserAccessAtLeastOneRoute', [$this->accessControl, 'hasUserAccessAtLeastOneRoute']),
+            new TwigFunction('hasUserAccessToRoute', [$this->accessControl, 'hasUserAccessToRoute']),
+            new TwigFunction('hasUserAccessToRoutes', [$this->accessControl, 'hasUserAccessToRoutes']),
+            new TwigFunction('hasUserAccessAtLeastOneRoute', [$this->accessControl, 'hasUserAccessAtLeastOneRoute']),
         ];
     }
 }

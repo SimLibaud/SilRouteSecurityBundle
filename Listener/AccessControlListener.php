@@ -11,7 +11,7 @@ use Sil\RouteSecurityBundle\Event\AccessDeniedToRouteEvent;
 use Sil\RouteSecurityBundle\Exception\LogicException;
 use Sil\RouteSecurityBundle\Security\AccessControl;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -33,9 +33,10 @@ class AccessControlListener
     }
 
     /**
-     * @param GetResponseEvent $event
+     * @param RequestEvent $event
+     * @return RequestEvent|void
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(RequestEvent $event)
     {
         $route = $event->getRequest()->attributes->get('_route');
 
@@ -55,7 +56,7 @@ class AccessControlListener
 
         if (false === $this->accessControl->hasUserAccessToRoute($user, $route)) {
             $access_denied_event = new AccessDeniedToRouteEvent($user, $event->getRequest());
-            $this->eventDispatcher->dispatch(AccessDeniedToRouteEvent::ON_ACCESS_DENIED_TO_ROUTE, $access_denied_event);
+            $this->eventDispatcher->dispatch($access_denied_event, AccessDeniedToRouteEvent::ON_ACCESS_DENIED_TO_ROUTE);
 
             if (true === $access_denied_event->hasResponse()) {
                 $event->setResponse($access_denied_event->getResponse());
