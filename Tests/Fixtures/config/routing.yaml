@@ -1,0 +1,6 @@
+sil_route_security:
+    resource: "@SilRouteSecurityBundle/Resources/config/routing.yaml"
+
+app_secured_route_test:
+    path: /secured-route-test
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController

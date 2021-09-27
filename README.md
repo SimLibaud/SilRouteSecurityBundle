@@ -1,8 +1,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/build-status/master)
 [![Code Coverage](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/SimLibaud/SilRouteSecurityBundle/?branch=master)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/fbed9290-6c11-4461-b386-cf0cb46fc43e/mini.png)](https://insight.sensiolabs.com/projects/fbed9290-6c11-4461-b386-cf0cb46fc43e)
-
+[![SymfonyInsight](https://insight.symfony.com/projects/0fe7d7d4-60ff-4f1c-a12f-c99d6510fafb/mini.svg)](https://insight.symfony.com/projects/0fe7d7d4-60ff-4f1c-a12f-c99d6510fafb)
 # SilRouteSecurityBundle
 
 This bundle provide a way to secure accesses to all routes of your application and adapt the view according to the logged user.
@@ -36,6 +35,16 @@ public function registerBundles()
         // ...
     );
 }
+```
+
+## Add routes configuration
+
+Routes are only required if you want to use the Javascript part of this bundle.
+
+```yaml
+# app/config/routes/sil_route_security.yaml
+sil_route_security:
+    resource: "@SilRouteSecurityBundle/Resources/config/routing.yaml"
 ```
 
 # Configuration
@@ -120,7 +129,11 @@ For exemple, you can inject this service into your `UserFormType` to configure t
 
 # Adapt template view
 
-The bundle expose 3 twig functions that allow you to generate view according to the roles of user.
+The bundle expose :
+* Twig functions that allow you to generate view according to the roles of user.
+* Javascript object that allow you to generate view according to the roles of user.
+
+## Twig
 
 #### `hasUserAccessToRoute`
 
@@ -167,6 +180,35 @@ The bundle expose 3 twig functions that allow you to generate view according to 
   <a href="{{ path('app_user_edit') }}">Edit user</a>
 {% endif %}
 ```
+
+## Javascript
+
+### Installation
+
+To load it globally, add the following line to your template:
+
+```html
+<script type="text/javascript" src="{{ asset('bundles/silroutesecurity/js/sil_route_security.min.js') }}"></script>
+<script src="{{ path('sil_route_security.export_js_secured_routes') }}"></script>
+```
+
+### Usage
+
+```javascript
+if (SilRouteSecurity.hasUserAccessToRoute('name_of_route')) {
+    console.log('Current authenticated user has access to route')
+}
+
+if (SilRouteSecurity.hasUserAccessToRoutes(['name_of_route_1', 'name_of_route_2'])) {
+    console.log('Current authenticated user has access to all routes')
+}
+
+if (SilRouteSecurity.hasUserAccessAtLeastOneRoute(['name_of_route_1', 'name_of_route_2'])) {
+    console.log('Current authenticated user has access to one of this routes')
+}
+```
+
+
 
 # Access denied behavior
 
