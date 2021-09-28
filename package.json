@@ -1,0 +1,19 @@
+{
+  "name": "route-security-bundle",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/SimLibaud/SilRouteSecurityBundle.git",
+  "author": "Simon Libaud <SimLibaud@users.noreply.github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^27.2.3",
+    "uglify-js": "^3.14.2"
+  },
+  "scripts": {
+    "build": "uglifyjs Resources/js/sil_route_security.js  --comments --compress --output Resources/public/js/sil_route_security.min.js"
+  },
+  "files": [
+    "Resources/js/sil_route_security_module.js"
+  ],
+  "type": "module"
+}

@@ -1,0 +1,4 @@
+sil_route_security.export_js_secured_routes:
+    path:  /sil-route-security/export-js-secured-routes.js
+    defaults: { _controller: sil_route_security.controller.export_js_secured_routes::exportAction }
+    methods:  [GET]

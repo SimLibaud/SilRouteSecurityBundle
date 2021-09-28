@@ -1,0 +1,4 @@
+// List of secured routes and associated permissions for current authenticated user
+{% for securedRoute, hasUserAccess in securedRoutes %}
+SilRouteSecurity.addSecuredRoutes('{{ securedRoute }}', {{ hasUserAccess ? 'true': 'false' }});
+{% endfor %}

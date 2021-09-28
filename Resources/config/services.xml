@@ -44,5 +44,13 @@
         </service>
         <service id="Sil\RouteSecurityBundle\Role\RolesProvider" alias="sil_route_security.roles_provider"/>
 
+        <service id="sil_route_security.controller.export_js_secured_routes" class="Sil\RouteSecurityBundle\Controller\ExportJsSecuredRoutesController">
+            <argument type="service" id="sil_route_security.access_control"></argument>
+            <argument type="service" id="security.untracked_token_storage"></argument>
+            <argument type="service" id="twig" />
+            <argument>%kernel.cache_dir%</argument>
+            <tag name="controller.service_arguments"></tag>
+        </service>
+
     </services>
 </container>

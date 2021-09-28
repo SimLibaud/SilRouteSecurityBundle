@@ -1,0 +1,31 @@
+framework:
+    secret:        test
+    router:        { resource: "%kernel.project_dir%/Fixtures/config/routing.yaml" }
+    test:          ~
+    validation:    { enabled: false }
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+security:
+    # https://symfony.com/doc/current/security/experimental_authenticators.html
+    enable_authenticator_manager: true
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+    access_control:
+        - { path: ^/, roles: ROLE_USER }
+
+sil_route_security:
+    enable_access_control: true
+    secured_routes: [app_secured_route_test]
