@@ -54,7 +54,7 @@ class RouteSecurityTools extends DataCollector
         return $this->data['role_for_route'];
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'sil_route_security.route_security_tools';
     }
