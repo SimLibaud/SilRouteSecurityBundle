@@ -59,7 +59,7 @@ class RouteSecurityTools extends DataCollector
         return 'sil_route_security.route_security_tools';
     }
     
-    public function reset()
+    public function reset(): void
     {
     }
 }
