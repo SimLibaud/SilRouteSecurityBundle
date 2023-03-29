@@ -18,7 +18,7 @@ class DynamicServiceCompilerPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (null !== $naming_strategy_id = $container->getParameter('sil_route_security.naming_strategy')) {
             $container->getDefinition('sil_route_security.access_control')->replaceArgument(1, new Reference($naming_strategy_id));

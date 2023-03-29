@@ -90,7 +90,7 @@ class AccessControlListenerTest extends TestCase
         $token = $this->createMock(TokenInterface::class);
         $token
             ->method('getUser')
-            ->willReturn('invalid user type');
+            ->willReturn(null);
         $tokenStorage = $this->createMock(TokenStorageInterface::class);
         $tokenStorage
             ->method('getToken')

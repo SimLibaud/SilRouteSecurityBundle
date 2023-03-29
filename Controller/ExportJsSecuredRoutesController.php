@@ -56,7 +56,7 @@ class ExportJsSecuredRoutesController
 
         $user = $this->tokenStorage->getToken()->getUser();
 
-        $cacheKey = md5($user->getUsername().json_encode($user->getRoles()));
+        $cacheKey = md5($user->getUserIdentifier().json_encode($user->getRoles()));
 
         $cache = new FilesystemAdapter('sil_route_security_bundle', 0, $this->cacheDir);
 

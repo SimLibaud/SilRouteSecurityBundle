@@ -1,8 +1,9 @@
 framework:
-    secret:        test
-    router:        { resource: "%kernel.project_dir%/Fixtures/config/routing.yaml" }
-    test:          ~
-    validation:    { enabled: false }
+    secret:  test
+    router: { resource: "%kernel.project_dir%/Fixtures/config/routing.yaml" }
+    test: ~
+    validation: { enabled: false }
+    http_method_override: false
 
 # Twig Configuration
 twig:
@@ -10,8 +11,6 @@ twig:
     strict_variables: "%kernel.debug%"
 
 security:
-    # https://symfony.com/doc/current/security/experimental_authenticators.html
-    enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     firewalls:
         dev:
