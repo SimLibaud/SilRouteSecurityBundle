@@ -40,7 +40,7 @@ class AccessControlListener
     {
         $route = $event->getRequest()->attributes->get('_route');
 
-        if (false === $this->accessControl->isEnable() || false === $this->accessControl->isRouteSecure($route)) {
+        if (null === $route || false === $this->accessControl->isEnable() || false === $this->accessControl->isRouteSecure($route)) {
             return;
         }
 

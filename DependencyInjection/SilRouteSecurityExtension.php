@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\Loader;
  */
 class SilRouteSecurityExtension extends Extension
 {
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         // Bundle configuration
         $configuration = new Configuration();

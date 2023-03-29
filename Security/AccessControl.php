@@ -24,7 +24,7 @@ class AccessControl
     private $ignored_routes;
     private $ignored_routes_format;
 
-    public function __construct(RouterInterface $router, NamingStrategyInterface $routeToRoleConverter, $configuration)
+    public function __construct(RouterInterface $router, NamingStrategyInterface $routeToRoleConverter, array $configuration)
     {
         $this->router = $router;
         $this->routeToRoleConverter = $routeToRoleConverter;
@@ -44,7 +44,7 @@ class AccessControl
      *
      * @return bool
      */
-    public function hasUserAccessToRoute(UserInterface $user, $route)
+    public function hasUserAccessToRoute(UserInterface $user, string $route): bool
     {
         if (false === $this->is_access_control_enable || false === $this->isRouteSecure($route)) {
             return true;
@@ -63,7 +63,7 @@ class AccessControl
      *
      * @return bool
      */
-    public function hasUserAccessToRoutes(UserInterface $user, $routes)
+    public function hasUserAccessToRoutes(UserInterface $user, array $routes): bool
     {
         foreach ($routes as $route) {
             if (false === $this->hasUserAccessToRoute($user, $route)) {
@@ -82,7 +82,7 @@ class AccessControl
      *
      * @return bool
      */
-    public function hasUserAccessAtLeastOneRoute(UserInterface $user, $routes)
+    public function hasUserAccessAtLeastOneRoute(UserInterface $user, array $routes): bool
     {
         foreach ($routes as $route) {
             if (true === $this->hasUserAccessToRoute($user, $route)) {
@@ -100,7 +100,7 @@ class AccessControl
      *
      * @return bool
      */
-    public function isRouteSecure($route)
+    public function isRouteSecure(string $route): bool
     {
         // Ignored routes
         if (true === in_array($route, $this->ignored_routes)) {
@@ -130,7 +130,7 @@ class AccessControl
      *
      * @return array
      */
-    public function getAllSecuredRoutes()
+    public function getAllSecuredRoutes(): array
     {
         $all_secured_routes = [];
         $configured_routes = array_keys($this->router->getRouteCollection()->all());
@@ -145,7 +145,7 @@ class AccessControl
     /**
      * @return bool
      */
-    public function isEnable()
+    public function isEnable(): bool
     {
         return $this->is_access_control_enable;
     }

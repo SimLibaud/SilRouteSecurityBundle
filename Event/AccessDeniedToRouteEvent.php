@@ -38,7 +38,7 @@ class AccessDeniedToRouteEvent extends Event
     /**
      * @return UserInterface $user
      */
-    public function getUser()
+    public function getUser(): UserInterface
     {
         return $this->user;
     }
@@ -46,7 +46,7 @@ class AccessDeniedToRouteEvent extends Event
     /**
      * @return Request $request
      */
-    public function getRequest()
+    public function getRequest(): Request
     {
         return $this->request;
     }
@@ -54,7 +54,7 @@ class AccessDeniedToRouteEvent extends Event
     /**
      * @param Response $response
      */
-    public function setResponse(Response $response)
+    public function setResponse(Response $response): void
     {
         $this->response = $response;
     }
@@ -62,7 +62,7 @@ class AccessDeniedToRouteEvent extends Event
     /**
      * @return null|Response
      */
-    public function getResponse()
+    public function getResponse(): ?Response
     {
         return $this->response;
     }
@@ -70,7 +70,7 @@ class AccessDeniedToRouteEvent extends Event
     /**
      * @return bool
      */
-    public function hasResponse()
+    public function hasResponse(): bool
     {
         return null !== $this->response;
     }

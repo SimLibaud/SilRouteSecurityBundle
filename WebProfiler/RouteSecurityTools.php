@@ -31,7 +31,7 @@ class RouteSecurityTools extends DataCollector
      * @param Response        $response
      * @param \Throwable|null $exception
      */
-    public function collect(Request $request, Response $response, \Throwable $exception = null)
+    public function collect(Request $request, Response $response, \Throwable $exception = null): void
     {
         $this->data['is_access_control_enable'] = $this->accessControl->isEnable();
         $route = $request->get('_route');
@@ -39,17 +39,17 @@ class RouteSecurityTools extends DataCollector
         $this->data['role_for_route'] = $this->routeToRoleConverter->generateRoleForRoute($route);
     }
 
-    public function isAccessControlEnable()
+    public function isAccessControlEnable(): bool
     {
         return $this->data['is_access_control_enable'];
     }
 
-    public function isRouteSecure()
+    public function isRouteSecure(): bool
     {
         return $this->data['is_route_secure'];
     }
 
-    public function getRoleForRoute()
+    public function getRoleForRoute(): string
     {
         return $this->data['role_for_route'];
     }
