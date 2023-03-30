@@ -17,6 +17,7 @@
                 }
             </argument>
         </service>
+        <service id="Sil\RouteSecurityBundle\Security\AccessControl" alias="sil_route_security.access_control"/>
 
         <service id="sil_route_security.twig.route_security_extension" class="Sil\RouteSecurityBundle\Twig\RouteSecurityExtension">
             <argument type="service" id="sil_route_security.access_control"></argument>
