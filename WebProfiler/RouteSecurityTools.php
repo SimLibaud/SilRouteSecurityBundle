@@ -35,7 +35,7 @@ class RouteSecurityTools extends DataCollector
     {
         $this->data['is_access_control_enable'] = $this->accessControl->isEnable();
         $route = $request->get('_route');
-        $this->data['is_route_secure'] = $this->accessControl->isRouteSecure($route);
+        $this->data['is_route_secure'] = null === $route ? false : $this->accessControl->isRouteSecure($route);
         $this->data['role_for_route'] = $this->routeToRoleConverter->generateRoleForRoute($route);
     }
 
