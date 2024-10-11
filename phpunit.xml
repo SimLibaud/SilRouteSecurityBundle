@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd" colors="true" bootstrap="./vendor/autoload.php" cacheDirectory=".phpunit.cache">
-  <coverage>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" colors="true" bootstrap="./vendor/autoload.php" cacheDirectory=".phpunit.cache">
+  <testsuites>
+    <testsuite name="Symfony SilRouteSecurityBundle Test Suite">
+      <directory>./Tests</directory>
+    </testsuite>
+  </testsuites>
+  <source>
     <include>
       <directory suffix=".php">.</directory>
     </include>
@@ -8,10 +13,5 @@
       <directory>./vendor</directory>
       <directory>./Tests/</directory>
     </exclude>
-  </coverage>
-  <testsuites>
-    <testsuite name="Symfony SilRouteSecurityBundle Test Suite">
-      <directory>./Tests</directory>
-    </testsuite>
-  </testsuites>
+  </source>
 </phpunit>
