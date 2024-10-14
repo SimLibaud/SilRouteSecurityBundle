@@ -4,7 +4,7 @@ namespace Sil\RouteSecurityBundle\Tests;
 
 use Sil\RouteSecurityBundle\Tests\Fixtures\AppKernel;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as BaseWebTestCase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -21,7 +21,7 @@ abstract class WebTestCase extends BaseWebTestCase
         $fs->remove($dir);
     }
 
-    protected static function getContainer(): ContainerInterface
+    protected static function getContainer(): Container
     {
         if (!static::$kernel) {
             static::$kernel = static::createKernel();
