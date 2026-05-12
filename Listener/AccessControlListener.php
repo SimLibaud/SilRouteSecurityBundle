@@ -58,6 +58,10 @@ class AccessControlListener
             $access_denied_event = new AccessDeniedToRouteEvent($user, $event->getRequest());
             $this->eventDispatcher->dispatch($access_denied_event, AccessDeniedToRouteEvent::ON_ACCESS_DENIED_TO_ROUTE);
 
+            if ($access_denied_event->isPropagationStopped()) {
+                return;
+            }
+
             if (true === $access_denied_event->hasResponse()) {
                 $event->setResponse($access_denied_event->getResponse());
 
